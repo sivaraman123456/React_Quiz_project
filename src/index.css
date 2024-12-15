@@ -37,6 +37,10 @@ body {
 header {
   margin: 2rem 0;
   text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  
 }
 
 header img {
