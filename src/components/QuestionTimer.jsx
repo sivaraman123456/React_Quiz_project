@@ -7,11 +7,15 @@ const QuestionTimer = ({ timeout, onTimeout }) => {
   // create setTimeout() exexute after the timeout create in useEffect
 
   useEffect(() => {
+    console.log("SetTimout");
+    
     setTimeout(onTimeout, timeout);
   }, [timeout, onTimeout]);
 
   // set the Interval for progress bar , It will show the progress time each question
   useEffect(() => {
+    console.log("INterval");
+    
     setInterval(() => {
       setRemaningTime((prevTime) => prevTime - 100);
     }, 100); // each 100 millisecond the inner function will execute

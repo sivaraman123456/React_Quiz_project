@@ -2,6 +2,7 @@ import { useState } from "react";
 import QUESTIONS from "../questions.js";
 import quizCompleteIcon from "../assets/quiz-complete.png";
 import QuestionTimer from "./QuestionTimer.jsx";
+import { useCallback } from "react";
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const activeQuestionIndex = userAnswers.length;
@@ -10,11 +11,19 @@ const Quiz = () => {
   const quizComplete = activeQuestionIndex === QUESTIONS.length;
   console.log(quizComplete);
 
-  function handleSelectAnswer(selectedAnswer) {
+  const handleSelectAnswer = useCallback(function handleSelectAnswer(
+    selectedAnswer
+  ) {
     setUserAnswers((prevSlectedAnswer) => {
       return [...prevSlectedAnswer, selectedAnswer];
     });
-  }
+  },
+  []);
+
+  const skippedAnswer = useCallback(
+    () => handleSelectAnswer(null),
+    [handleSelectAnswer]
+  );
   if (quizComplete) {
     return (
       <div id="summary">
@@ -28,10 +37,7 @@ const Quiz = () => {
   return (
     <div id="quiz">
       <div id="question">
-        <QuestionTimer
-          timeout={10000}
-          onTimeout={() => handleSelectAnswer(null)}
-        />
+        <QuestionTimer timeout={10000} onTimeout={skippedAnswer} />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id="answers">
           {shuffledAnswers.map((answer) => {
