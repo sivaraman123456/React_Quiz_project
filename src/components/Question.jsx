@@ -52,7 +52,7 @@ if(answer.isCorrect !== null)
         mode={answerState} // for styling purpose
       />
       <h2>
-        <span>{index + 1} .</span> {QUESTION[index].text}
+        <span>{index + 1}.</span> {QUESTION[index].text}
       </h2>
       <Answers
        
