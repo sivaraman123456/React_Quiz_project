@@ -3,6 +3,7 @@ import QUESTIONS from "../questions.js";
 import quizCompleteIcon from "../assets/quiz-complete.png";
 import { useCallback } from "react";
 import Question from "./Question.jsx";
+import Summary from "./Summary.jsx";
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
 
@@ -15,26 +16,27 @@ const Quiz = () => {
   const quizComplete = activeQuestionIndex === QUESTIONS.length; // last Template
   console.log(quizComplete);
 
-  const handleSelectAnswer = useCallback(
-    function handleSelectAnswer(selectedAnswer) {
-      setUserAnswers((prevSlectedAnswer) => {
-        return [...prevSlectedAnswer, selectedAnswer];
-      });
-    },
-    []
-  ); // this dependecy based executing this callback hook
+  const handleSelectAnswer = useCallback(function handleSelectAnswer(
+    selectedAnswer
+  ) {
+    setUserAnswers((prevSlectedAnswer) => {
+      return [...prevSlectedAnswer, selectedAnswer];
+    });
+  },
+  []); // this dependecy based executing this callback hook
 
   const skippedAnswer = useCallback(
     () => handleSelectAnswer(null),
     [handleSelectAnswer]
   );
   if (quizComplete) {
-    return (
-      <div id="summary">
-        <img src={quizCompleteIcon} alt="Trohy Icon" />
-        <h2>Quiz completed!</h2>
-      </div>
-    );
+    // return (
+    //   <div id="summary">
+    //     <img src={quizCompleteIcon} alt="Trohy Icon" />
+    //     <h2>Quiz completed!</h2>
+    //   </div>
+    // );
+    return <Summary userAnswer={userAnswers} />;
   }
 
   return (
