@@ -9,6 +9,17 @@ const Question = ({ index, onSelecteAnswer, skippedAnswer }) => {
     selectedAnswer: "",
     isCorrect: null,
   });
+let timer=10000;
+// check if the user selecte the answer or not
+if(answer.selectedAnswer)
+{
+  timer=1000
+}
+// check whether the answer correct or not
+if(answer.isCorrect !== null)
+{
+  timer=2000;
+}
 
   function handleSelectAnswer(answer) {
     setAnswer({
@@ -35,15 +46,16 @@ const Question = ({ index, onSelecteAnswer, skippedAnswer }) => {
   return (
     <div id="question">
       <QuestionTimer
-        // whenever the new question move than only it will re-create
-        timeout={10000}
-        onTimeout={skippedAnswer}
+       key={timer} // whenever the timer reset  than only it will re-create
+        timeout={timer}
+        onTimeout={answer.selectedAnswer === '' ? skippedAnswer:null}// if the answer didn't selected than only the fun will execute
+        mode={answerState} // for styling purpose
       />
       <h2>
         <span>{index + 1} .</span> {QUESTION[index].text}
       </h2>
       <Answers
-        // whenever the new question move than only it will re-create
+       
         selectedAnswer={answer.selectedAnswer}
         answerState={answerState}
         answers={QUESTION[index].answers}
