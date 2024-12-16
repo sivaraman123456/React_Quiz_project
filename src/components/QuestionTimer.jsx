@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-const QuestionTimer = ({ timeout, onTimeout }) => {
+const QuestionTimer = ({ timeout, onTimeout,mode }) => {
   const [remainingTime, setRemaningTime] = useState(timeout);
 
   // create setTimeout() exexute after the timeout create in useEffect
@@ -28,7 +28,7 @@ const QuestionTimer = ({ timeout, onTimeout }) => {
     }; // // once the Interval exit of the  useEffect than clean the timer
   }, []); //
 
-  return <progress value={remainingTime} max={timeout} id="question" />;
+  return <progress value={remainingTime} max={timeout} id="question" className={mode} />;
 };
 
 export default QuestionTimer;
