@@ -8,20 +8,24 @@ const QuestionTimer = ({ timeout, onTimeout }) => {
 
   useEffect(() => {
     console.log("SetTimout");
-    
-   const timer= setTimeout(onTimeout, timeout);
-   return ()=> {clearTimeout(timer)}  // once the timeout clean the timer 
+
+    const timer = setTimeout(onTimeout, timeout);
+    return () => {
+      clearTimeout(timer);
+    }; // once the time is out than clean the timer
   }, [timeout, onTimeout]);
 
   // set the Interval for progress bar , It will show the progress time each question
   useEffect(() => {
     console.log("INterval");
-    
-   const timer= setInterval(() => {
+
+    const timer = setInterval(() => {
       setRemaningTime((prevTime) => prevTime - 100);
     }, 100); // each 100 millisecond the inner function will execute
 
-    return ()=> {clearInterval(timer)}  // // once the Interval out or come the out the useEffect clean the timer 
+    return () => {
+      clearInterval(timer);
+    }; // // once the Interval exit of the  useEffect than clean the timer
   }, []); //
 
   return <progress value={remainingTime} max={timeout} id="question" />;
